@@ -3,69 +3,155 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>formmaker</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css styles/vendor.css -->
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Forms made easy - Formmaker</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+</head>
+<body>
+<!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="container-fluid">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li><a href="#" data-toggle="dropdown">Categories <span class="caret"></span></a>
+            	<ul class="dropdown-menu" role="menu">
+                	<li><a href="#">Contact</a></li>
+                	<li><a href="#">General</a></li>
+                	<li><a href="#">Quiz</a></li>
+                	<li><a href="#">Subscription</a></li>
+            	</ul></li>
+            <li><a href="#">Login to save</a></li>
+        </ul>
+        <h3 class="text-muted">Formmaker</h3>
+    </div>
 
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+	<div class="saved alert alert-success fade in" id="saved">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		<strong>Form saved</strong>
+	</div>
+
+    <div class="jumbotron">
+        <h1>Formmaker</h1>
+        <p class="lead">Create a form.<br>
+        The way <strong>you</strong> want.<br>
+        We do the rest.</p>
+        
+        <p class="loading">Loading the magic...</p>
+        <a class="btn btn-lg btn-success" id="start" onclick="$('.jumbotron').fadeOut('slow')">Start now!</a>
+    </div>
 
 
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">formmaker</h3>
-            </div>
 
-            <div class="jumbotron">
-                <h1>'Allo, 'Allo!</h1>
-                <p class="lead">Always a pleasure scaffolding your apps.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-            </div>
 
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    <h4>HTML5 Boilerplate</h4>
-                    <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+    <div class="row">
+		<div class="col-xs-5">
+<!--
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#form-panel" data-toggle="tab">Form</a></li>
+			</ul>
+-->
 
-                    <h4>Bootstrap</h4>
-                    <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
+			<div class="tab-content">
+				<div class="tab-pane active" id="panel-form">
+					<h2 class="text-center">Drop the elements of your form here</h2>
+					<div id="slot-1" class="slot free"></div>
+					<div id="slot-2" class="slot free"></div>
+					<div id="slot-3" class="slot free"></div>
+					<div id="slot-4" class="slot free"></div>
+					<div id="slot-5" class="slot free"></div>
+					<div id="slot-6" class="slot free"></div>
+					<div id="slot-7" class="slot free"></div>
+					<div id="slot-8" class="slot free"></div>
+					<div id="slot-9" class="slot free"></div>
+					<div id="slot-10" class="slot free"></div>
+				</div>
+			</div>
+		</div>
 
-                    <h4>Modernizr</h4>
-                    <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
 
-                </div>
-            </div>
 
-            <div class="footer">
-                <p>♥ from the Yeoman team</p>
-            </div>
 
-        </div>
+
+		<div class="col-xs-7">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#elements-panel" accesskey="1" data-toggle="tab" title="[Shortcut] Win: Alt+1 | Mac: Control+Option+1">Elements</a></li>
+				<li><a href="#panel-prop" accesskey="2" data-toggle="tab" title="[Shortcut] Win: Alt+2 | Mac: Control+Option+2">Properties</a></li>
+				<li><a href="#panel-css" accesskey="3" data-toggle="tab" title="[Shortcut] Win: Alt+3 | Mac: Control+Option+3">CSS</a></li>
+				<li><a href="#panel-preview" accesskey="4" data-toggle="tab" title="[Shortcut] Win: Alt+4 | Mac: Control+Option+4">Preview</a></li>
+			</ul>
+			
+			<div class="tab-content">
+				<div class="tab-pane active" id="elements-panel">
+					<h2>Elements</h2>
+					<ul id="element-list">
+						<li title="button"><a href="javascript:;" class="icon icon-button">Button</a></li>
+						<li title="text"><a href="javascript:;" class="icon icon-text">Text input</a></li>
+						<li title="email"><a href="javascript:;" class="icon icon-email">Email</a></li>
+						<li title="url"><a href="javascript:;" class="icon icon-url">Url</a></li>
+					</ul>
+<!--
+					<label class="draggable">Text <input class="form-control" type="text"></label>
+					<label class="draggable">Email <input type="email"></label>
+					<label class="draggable">Search <input type="search"></label>
+					<label class="draggable">Url <input type="url" placeholder="http://"></label>
+					<label class="draggable">Tel <input type="tel"></label>
+					<label class="draggable"><textarea name="" id="" cols="30" rows="3"></textarea></label>
+					<label class="draggable"><input type="checkbox"> Checkbox</label>
+					<label class="draggable"><input placeholder="Password" type="password">(Confirm password)</label>
+					<label class="draggable"><input type="radio"> Radio</label>
+					<label class="draggable"><button>Button</button></label>
+					<label class="draggable"><input type="submit" value="Submit"></label>
+					<label class="draggable"><select name="" id="">
+						<option value="">Drop down</option>
+					</select></label>
+-->
+				</div>
+				<div class="tab-pane" id="panel-prop">
+					<h2>Properties</h2>
+					<input id="current-slot" type="hidden" value="">
+					<div class="prop-input-button">
+						<label>Label <input name="label" placeholder="My button" type="text"></label>
+						<label>Label <input name="label" placeholder="My button" type="text"></label>
+					</div>
+				</div>
+				<div class="tab-pane" id="panel-css">
+					<h2>CSS</h2>
+					<textarea id="css" name="css" cols="90" rows="30">
+input { background: blue; }
+input[type="submit"] { background: url('images/submit.png'); }
+					</textarea>
+				</div>
+				<div class="tab-pane" id="panel-preview">
+					<h2>Preview</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="footer">
+        <p class="text-center">Created by <a href="http://www.samuweb.info/" target="_blank">Samuweb</a></p>
+    </div>
+
+</div>
 
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/jqueryui/ui/jquery-ui.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 

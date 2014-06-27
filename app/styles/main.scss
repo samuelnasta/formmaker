@@ -2,6 +2,45 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
+
+label { display: block; }
+li { list-style: none; }
+
+
+#css { background: #fee; display: block; margin: 0 auto 10px; }
+#draggable { background: blue; width: 150px; height: 150px; padding: 0.5em; }
+#droppable { background: red; width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+#element-list li { float: left; }
+#element-list li img { cursor: move; }
+#panel-form .gallery li { float: none !important; }
+#saved, #start { display: none; }
+
+.container-fluid { padding: 0 10px; }
+.dragging { background: #ccf !important; }
+.glyphicon-move { cursor: move; margin-right: 10px; }
+.remove { float: right; }
+.slot { background: #fee; border: 1px solid #000; display: block; height: auto; margin: 0 auto 10px; min-height: 40px; padding: 10px; width: 90%; }
+.slot img { cursor: pointer; }
+.sort-placehold { border: 1px solid red; display: block; height: auto; margin: 0 auto 10px; min-height: 40px; width: 90%; }
+
+
+.icon-button, .icon-email, .icon-url, .icon-text { background: url('../images/sprites.png') 0 0 no-repeat; display: inline-block; height: 28px; text-indent: -9999px; width: 155px; }
+.icon-button { background-position: 0 -107px; width: 60px; }
+.icon-email { background-position: 0 -37px; }
+.icon-url { background-position: 0 0; }
+.icon-text { background-position: 0 -67px; height: 36px; width: 180px; }
+
+
+
+
+
+
+
+
+
+
+
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
