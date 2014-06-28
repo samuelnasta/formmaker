@@ -27,13 +27,13 @@ $(document).ready(function() {
 			dataArray = dataArray.split(',');
 
 			// Creates a temp array to sort
-			var tempArray = [];
+			window.tempArray = [];
 
 			for(var i = 0; i < dataArray.length; i++) {
-				tempArray.push(localStorage.getItem(dataArray[i]));
+				window.tempArray.push(localStorage.getItem(dataArray[i]));
 			}
 			// Removes empty elements
-			tempArray = tempArray.filter(function(e) { return e; });
+			window.tempArray = window.tempArray.filter(function(e) { return e; });
 
 
 			localStorage.clear();
@@ -42,9 +42,9 @@ $(document).ready(function() {
 			// Returns the final object with optimized sorting
 			var finalObj = {};
 			var tempOrder = [];
-			for(var j = 0; j < tempArray.length; j++) {
+			for(var j = 0; j < window.tempArray.length; j++) {
 				var key = 'slot-' + (j+1);
-				finalObj[key] = tempArray[j];
+				finalObj[key] = window.tempArray[j];
 				tempOrder.push(key);
 			}
 			localStorage.order = tempOrder.join();
@@ -178,8 +178,38 @@ $(document).ready(function() {
 	});
 
 
+	$('a[href=#panel-preview]').on('click',function() {
+		var JSONArray = JSON.stringify(window.tempArray);
+		window.load();
+		$.post('http://formmaker:8888/preview.php', {
+			'form': JSONArray,
+			'css' : $('#css').val()
+		}).done(function(data) {
+			$('#preview').html(data);
+		}).fail(function() {
+			window.alert('Ops! Error found! Sorry about that.');
+		});
 
 
+	});
+
+
+
+	// Saves form to database
+	window.save = function() {
+		var JSONArray = JSON.stringify(window.tempArray);
+		window.load();
+		$.post('http://formmaker:8888/save.php?save', {
+			'form' : JSONArray
+		}).done(function() {
+			$('#saved').slideDown();
+			window.setTimeout(function() {
+				$('#saved').alert('close');
+			}, 5000);
+		}).fail(function() {
+			window.alert('Ops! Error found! Sorry about that.');
+		});
+	};
 
 
 

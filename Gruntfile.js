@@ -1,4 +1,4 @@
-// Generated on 2014-06-20 using generator-webapp 0.4.6
+// Generated on 2014-06-28 using generator-webapp 0.4.6
 'use strict';
 
 // # Globbing
