@@ -50,7 +50,7 @@
         We do the rest.</p>
         
         <p class="loading">Loading the magic...</p>
-        <a class="btn btn-lg btn-success" id="start" onclick="$('.jumbotron').fadeOut('slow')">Start now!</a>
+        <a class="btn btn-lg btn-success" id="start" onclick="start()">Start now!</a>
     </div>
 
 
@@ -121,10 +121,31 @@
 				</div>
 				<div class="tab-pane" id="panel-prop">
 					<h2>Properties</h2>
-					<input id="current-slot" type="hidden" value="">
+					<input id="current-slot" type="hidden">
 					<div class="prop-input-button">
-						<label>Label <input name="label" placeholder="My button" type="text"></label>
-						<label>Label <input name="label" placeholder="My button" type="text"></label>
+
+
+						<form id="form-prop-input">
+							<input name="type" type="hidden" value="text">
+							<label><span>Label</span> <input id="input-label" name="input-label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="input-placeholder" name="input-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="input-value" name="input-value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Min length</span> <input id="input-minlength" name="input-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="input-maxlength" name="input-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="input-error-message" name="input-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="input-required" name="input-required" type="checkbox"></label>
+						</form>
+
+
+						<form id="form-prop-button">
+							<input name="type" type="hidden" value="button">
+							<label><span>Value</span> <input id="button-label" name="button-label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Validation message</span> <input id="button-error-message" name="button-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input id="button-required" name="button-required" type="checkbox"></label>
+						</form>
+
+
+
 					</div>
 				</div>
 				<div class="tab-pane" id="panel-css">
