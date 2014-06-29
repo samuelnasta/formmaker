@@ -56,7 +56,7 @@ $(document).ready(function() {
 				var temp = value.split('"');
 				var type = temp[3];
 				var wrapper = '<li title="' + type + '">';
-				var removeIcon = '<a href="javascript:;" class="remove" data-id="' + key + '" title="Remove this element" onclick="removeElement(this)"><i class="">&times;</i>';
+				var removeIcon = '<a href="javascript:;" class="remove" data-id="' + key + '" title="Remove this element" onclick="removeElement(this)"><i>&times;</i></a>';
 				var element = '<a href="javascript:;" class="icon icon-' + type + '"></a>';
 
 				if(value) {
@@ -82,7 +82,7 @@ $(document).ready(function() {
 	});
 
 	window.drag = function(draggable, droppableId) {
-		var removeIcon = '<a href="javascript:;" class="remove" data-id="' + droppableId + '" title="Remove this element" onclick="removeElement(this)"><i class="">&times;</i>';
+		var removeIcon = '<a href="javascript:;" class="remove" data-id="' + droppableId + '" title="Remove this element" onclick="removeElement(this)"><i>&times;</i></a>';
 		draggable.clone().prepend(window.sortIcon).append(removeIcon).appendTo('#' + droppableId);
 		$('#' + droppableId).removeClass('free').droppable('disable');
 	};

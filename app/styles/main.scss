@@ -12,30 +12,39 @@ li { list-style: none; }
 
 
 #css { background: #fee; display: block; margin: 0 auto 10px; }
-#draggable { background: blue; width: 150px; height: 150px; padding: 0.5em; }
-#droppable { background: red; width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
-#element-list li { float: left; }
+#element-list { padding: 20px; }
+#element-list li { margin: 8px 0; }
 #element-list li img { cursor: move; }
 #panel-form .gallery li { float: none !important; }
 #panel-prop form { display: none; }
 #saved, #start { display: none; }
 
+
+.affix { top: 0; }
 .container-fluid { padding: 0 10px; }
-.dragging { background: #ccf !important; }
-.glyphicon-move { cursor: move; margin-right: 10px; }
+.dragging { background: #f1f1f1 !important; }
+.glyphicon-move { cursor: move; margin-right: 10px; opacity: 0.8; top: -10px; }
+.icon { cursor: pointer; }
 .prop-input-button { padding: 10px; }
-.remove { float: right; }
-.slot { background: #fee; border: 1px solid #000; display: block; height: auto; margin: 0 auto 10px; min-height: 40px; padding: 10px; width: 90%; }
+.remove { color: #333; float: right; }
+.slot { background: #fee; border: 1px solid #000; display: block; height: auto; margin: 0 auto 12px; min-height: 40px; padding: 10px; width: 90%; }
 .slot img { cursor: pointer; }
+.slot li { height: 36px; }
 .sort-placehold { border: 1px solid red; display: block; height: auto; margin: 0 auto 10px; min-height: 40px; width: 90%; }
 
 
-.icon-button, .icon-email, .icon-url, .icon-text { background: url('../images/sprites.png') 0 0 no-repeat; display: inline-block; height: 28px; text-indent: -9999px; width: 155px; }
-.icon-button { background-position: 0 -107px; width: 60px; }
-.icon-email { background-position: 0 -37px; }
-.icon-url { background-position: 0 0; }
-.icon-text { background-position: 0 -67px; height: 36px; width: 180px; }
-
+.icon-button, .icon-checkbox, .icon-date, .icon-dropdown, .icon-email, .icon-password, .icon-phone, .icon-radio, .icon-text, .icon-textarea, .icon-url { background: url('../images/sprite.png') 0 0 no-repeat; display: inline-block; height: 36px; text-indent: -9999px; width: 176px; }
+.icon-button { background-position: 0 -280px; }
+.icon-checkbox { background-position: 0 -352px; }
+.icon-date { background-position: 0 -180px; }
+.icon-dropdown { background-position: 0 -390px; }
+.icon-email { background-position: 0 -36px; }
+.icon-password { background-position: 0 -144px; }
+.icon-phone { background-position: 0 -72px; }
+.icon-radio { background-position: 0 -316px; }
+.icon-text { background-position: 0 0; }
+.icon-textarea { background-position: 0 -216px; height: 64px; }
+.icon-url { background-position: 0 -108px; }
 
 
 
