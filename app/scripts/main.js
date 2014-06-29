@@ -129,28 +129,41 @@ $(document).ready(function() {
 
 
 
+	// Add new slot
+	window.addSlot = function() {
+		var slotNumber = $('#slot-container div').last().attr('id').split('slot-');
+		slotNumber = parseInt(slotNumber[1]);
+		slotNumber++;
+		
+		$('#slot-container').append('<div id="slot-' + slotNumber + '" class="slot free"></div>');
+		$('#slot-' + slotNumber).droppable({
+			accept: '#element-list > li',
+			activeClass: 'dragging',
+			drop: function(event, ui) {
+				var droppableId = $(this).attr('id');
+				window.drag(ui.draggable, droppableId);
+			}
+		});
+	};
+
+
 	// Change properties
 	$('.slot').on('click','li a.icon',function() {
-		$('a[href="#panel-prop"]').trigger('click');
 		var slotId = $(this).parent().parent().attr('id');
+		var title = $(this).parent().attr('title');
+
+		$('a[href="#panel-prop"]').trigger('click');
 		$('.slot').removeClass('sort-placehold');
 		$(this).parent().parent().addClass('sort-placehold');
 		$('#panel-prop form').removeClass('active');
-
-
-		switch($(this).parent().attr('title')){
-			case 'button':
-				$('#form-prop-button').addClass('active');
-				$('#current-slot').val(slotId);
-				window.fillForm(slotId);
-				break;
-			case 'text':
-				$('#form-prop-input').addClass('active');
-				$('#current-slot').val(slotId);
-				window.fillForm(slotId);
-				break;
-		}
+		$('#form-prop-' + title).addClass('active');
+		$('#current-slot').val(slotId);
+		window.fillForm(slotId);
 	});
+
+
+
+	// Get the value from Local Storage and fill the properties panel
 	window.fillForm = function(slotId) {
 		$('#panel-prop form.active input[type=checkbox]').each(function() { $(this).removeAttr('checked'); });
 		$('#panel-prop form.active')[0].reset();

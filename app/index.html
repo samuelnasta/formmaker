@@ -64,17 +64,19 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="panel-form">
 					<h2 class="text-center">Drop the elements of your form here</h2>
-					<div id="slot-1" class="slot free"></div>
-					<div id="slot-2" class="slot free"></div>
-					<div id="slot-3" class="slot free"></div>
-					<div id="slot-4" class="slot free"></div>
-					<div id="slot-5" class="slot free"></div>
-					<div id="slot-6" class="slot free"></div>
-					<div id="slot-7" class="slot free"></div>
-					<div id="slot-8" class="slot free"></div>
-					<div id="slot-9" class="slot free"></div>
-					<div id="slot-10" class="slot free"></div>
-					<a class="btn btn-sm btn-block btn-primary">Add new slot</a>
+					<div id="slot-container">
+						<div id="slot-1" class="slot free"></div>
+						<div id="slot-2" class="slot free"></div>
+						<div id="slot-3" class="slot free"></div>
+						<div id="slot-4" class="slot free"></div>
+						<div id="slot-5" class="slot free"></div>
+						<div id="slot-6" class="slot free"></div>
+						<div id="slot-7" class="slot free"></div>
+						<div id="slot-8" class="slot free"></div>
+						<div id="slot-9" class="slot free"></div>
+						<div id="slot-10" class="slot free"></div>
+					</div>
+					<a class="btn btn-sm btn-block btn-primary" onclick="addSlot()">Add new slot</a>
 				</div>
 			</div>
 		</div>
@@ -99,7 +101,7 @@
 						<li title="phone"><a class="icon icon-phone"></a></li>
 						<li title="url"><a class="icon icon-url"></a></li>
 						<li title="password"><a class="icon icon-password"></a></li>
-<!-- 						<li title="date"><a class="icon icon-date"></a></li> -->
+ 						<!-- <li title="date"><a class="icon icon-date"></a></li> -->
 						<li title="textarea"><a class="icon icon-textarea"></a></li>
 						<li title="button"><a class="icon icon-button"></a></li>
 						<li title="radio"><a class="icon icon-radio"></a></li>
@@ -107,13 +109,18 @@
 						<li title="dropdown"><a class="icon icon-dropdown"></a></li>
 					</ul>
 				</div>
+
+
+
 				<div class="tab-pane" id="panel-prop">
 					<h2>Properties</h2>
 					<input id="current-slot" type="hidden">
 					<div class="prop-input-button">
 
 
-						<form id="form-prop-input">
+
+						<!-- Text -->
+						<form id="form-prop-text">
 							<input name="type" type="hidden" value="text">
 							<label><span>Label</span> <input id="input-label" name="input-label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="input-placeholder" name="input-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
@@ -125,6 +132,64 @@
 						</form>
 
 
+
+						<!-- Radio -->
+						<form id="form-prop-radio">
+							<input name="type" type="hidden" value="radio">
+							<label><span>Label</span> <input id="input-label" name="input-label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="input-placeholder" name="input-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="input-value" name="input-value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Min length</span> <input id="input-minlength" name="input-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="input-maxlength" name="input-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="input-error-message" name="input-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="input-required" name="input-required" type="checkbox"></label>
+						</form>
+
+
+
+						<!-- Checkbox -->
+						<form id="form-prop-checkbox">
+							<input name="type" type="hidden" value="checkbox">
+							<label><span>Label</span> <input id="input-label" name="input-label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="input-placeholder" name="input-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="input-value" name="input-value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Min length</span> <input id="input-minlength" name="input-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="input-maxlength" name="input-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="input-error-message" name="input-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="input-required" name="input-required" type="checkbox"></label>
+						</form>
+
+
+
+						<!-- Dropdown -->
+						<form id="form-prop-dropdown">
+							<input name="type" type="hidden" value="dropdown">
+							<label><span>Label</span> <input id="input-label" name="input-label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="input-placeholder" name="input-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="input-value" name="input-value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Min length</span> <input id="input-minlength" name="input-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="input-maxlength" name="input-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="input-error-message" name="input-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="input-required" name="input-required" type="checkbox"></label>
+						</form>
+
+
+
+						<!-- Textarea -->
+						<form id="form-prop-textarea">
+							<input name="type" type="hidden" value="textarea">
+							<label><span>Label</span> <input id="input-label" name="input-label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="input-placeholder" name="input-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="input-value" name="input-value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Min length</span> <input id="input-minlength" name="input-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="input-maxlength" name="input-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="input-error-message" name="input-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="input-required" name="input-required" type="checkbox"></label>
+						</form>
+
+
+
+						<!-- Button -->
 						<form id="form-prop-button">
 							<input name="type" type="hidden" value="button">
 							<label><span>Value</span> <input id="button-label" name="button-label" placeholder="What will be before the input" type="text"></label>
