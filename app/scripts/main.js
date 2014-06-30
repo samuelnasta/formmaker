@@ -103,7 +103,7 @@ $(document).ready(function() {
 
 	// Remove form input from slots
 	window.removeElement = function(element) {
-		$(element).parent().remove();
+		$(element).parent().fadeOut(300, function() { $(this).remove(); });
 		var dataId = $(element).attr('data-id');
 		$('#' + dataId).droppable('enable');
 		$('.slot').removeClass('sort-placehold');
@@ -115,13 +115,13 @@ $(document).ready(function() {
 	// Refresh the list order
 	window.list = function() {
 		var listArray = [];
-		$('#panel-form div').each(function() { listArray.push($(this).attr('id')); });
+		$('#slot-container div').each(function() { listArray.push($(this).attr('id')); });
 		localStorage.order = listArray;
 	};
 
 
 	// Sorting
-	$('#panel-form').sortable({
+	$('#slot-container').sortable({
 		handle: 'i',
 		placeholder: 'sort-placehold',
 		stop: function() { window.list(); }
@@ -135,7 +135,7 @@ $(document).ready(function() {
 		slotNumber = parseInt(slotNumber[1]);
 		slotNumber++;
 		
-		$('#slot-container').append('<div id="slot-' + slotNumber + '" class="slot free"></div>');
+		$('#slot-container').append('<div id="slot-' + slotNumber + '" class="slot free" data-toggle="tooltip" data-placement="right" title="#slot-' + slotNumber + '"><span></span></div>').children(':last').hide().fadeIn(500);
 		$('#slot-' + slotNumber).droppable({
 			accept: '#element-list > li',
 			activeClass: 'dragging',
@@ -144,11 +144,13 @@ $(document).ready(function() {
 				window.drag(ui.draggable, droppableId);
 			}
 		});
+		$(document.body).scrollTop($('#slot-' + slotNumber).offset().top);
 	};
 
 
+
 	// Change properties
-	$('.slot').on('click','li a.icon',function() {
+	$('#slot-container').on('click','.slot li a.icon',function() {
 		var slotId = $(this).parent().parent().attr('id');
 		var title = $(this).parent().attr('title');
 
@@ -191,6 +193,8 @@ $(document).ready(function() {
 	});
 
 
+
+	// Preview the form
 	$('a[href=#panel-preview]').on('click',function() {
 		var JSONArray = JSON.stringify(window.tempArray);
 		window.load();
@@ -202,8 +206,14 @@ $(document).ready(function() {
 		}).fail(function() {
 			window.alert('Ops! Error found! Sorry about that.');
 		});
+	});
 
 
+
+	// Edit CSS panel
+	$('a[href=#panel-css]').on('click',function() {
+		$('#slot-container .slot').tooltip('show');
+		window.setTimeout(function() { $('#slot-container .slot').tooltip('hide'); }, 5000);
 	});
 
 
@@ -212,7 +222,7 @@ $(document).ready(function() {
 	window.save = function() {
 		var JSONArray = JSON.stringify(window.tempArray);
 		window.load();
-		$.post('http://formmaker:8888/save.php?save', {
+		$.post('http://formmaker:8888/functions.php?save', {
 			'form' : JSONArray
 		}).done(function() {
 			$('#saved').slideDown();
@@ -225,6 +235,54 @@ $(document).ready(function() {
 	};
 
 
+
+	// Login
+	$('#submit-login').on('click',function() {
+		$('#modal-login').modal('hide');
+
+		$.post('http://formmaker:8888/functions.php?login', {
+			'login-email': $('#login-email').val(),
+			'login-password': $('#login-password').val()
+		}, function(data) {
+			if(parseInt(data) === 1) {
+				$('#logged').alert().slideDown();
+				window.setTimeout(function() {
+					$('#logged').alert('close');
+				}, 5000);
+				$('#menu-login').hide();
+				$('#menu-save').show().attr('disabled', false);
+				$('#menu-logout').show();
+			} else {
+				window.alert('Login incorrect. Please verify and try again.');
+			}
+		}).fail(function() {
+			window.alert('Ops! Error found! Sorry about that.');
+		});
+	});
+
+
+
+	// Sign up
+	$('#submit-signup').on('click',function() {
+		if($('#signup-password').val() === $('#signup-confirm').val()) {
+
+			$('#modal-signup').modal('hide');
+
+			$.post('http://formmaker:8888/functions.php?signup', {
+				'signup-email': $('#signup-email').val(),
+				'signup-password': $('#signup-password').val()
+			}, function(data) {
+				window.alert(data);
+				if(parseInt(data) === 1) {
+					window.alert('Signup created');
+				}
+			}).fail(function() {
+				window.alert('Ops! Error found! Sorry about that.');
+			});
+		} else {
+			window.alert('The passwords doesn\'t match.');
+		}
+	});
 
 
 /*
