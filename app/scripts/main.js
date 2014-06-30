@@ -220,14 +220,16 @@ $(document).ready(function() {
 
 	// Saves form to database
 	window.save = function() {
-		var JSONArray = JSON.stringify(window.tempArray);
 		window.load();
+		var JSONArray = JSON.stringify(window.tempArray);
+
 		$.post('http://formmaker:8888/functions.php?save', {
-			'form' : JSONArray
+			'form': JSONArray,
+			'css': $('#css').val()
 		}).done(function() {
 			$('#saved').slideDown();
 			window.setTimeout(function() {
-				$('#saved').alert('close');
+				$('#saved').slideUp();
 			}, 5000);
 		}).fail(function() {
 			window.alert('Ops! Error found! Sorry about that.');
@@ -245,9 +247,9 @@ $(document).ready(function() {
 			'login-password': $('#login-password').val()
 		}, function(data) {
 			if(parseInt(data) === 1) {
-				$('#logged').alert().slideDown();
+				$('#logged').slideDown();
 				window.setTimeout(function() {
-					$('#logged').alert('close');
+					$('#logged').slideUp();
 				}, 5000);
 				$('#menu-login').hide();
 				$('#menu-save').show().attr('disabled', false);
@@ -255,6 +257,19 @@ $(document).ready(function() {
 			} else {
 				window.alert('Login incorrect. Please verify and try again.');
 			}
+		}).fail(function() {
+			window.alert('Ops! Error found! Sorry about that.');
+		});
+	});
+
+
+
+	// Logout
+	$('#menu-logout').on('click',function() {
+		$.post('http://formmaker:8888/functions.php?logout', function() {
+			$('#menu-login').show();
+			$('#menu-save').hide().attr('disabled', true);
+			$('#menu-logout').hide();
 		}).fail(function() {
 			window.alert('Ops! Error found! Sorry about that.');
 		});
@@ -271,11 +286,8 @@ $(document).ready(function() {
 			$.post('http://formmaker:8888/functions.php?signup', {
 				'signup-email': $('#signup-email').val(),
 				'signup-password': $('#signup-password').val()
-			}, function(data) {
-				window.alert(data);
-				if(parseInt(data) === 1) {
-					window.alert('Signup created');
-				}
+			}).done(function() {
+				window.alert('Signup created');
 			}).fail(function() {
 				window.alert('Ops! Error found! Sorry about that.');
 			});
@@ -283,14 +295,4 @@ $(document).ready(function() {
 			window.alert('The passwords doesn\'t match.');
 		}
 	});
-
-
-/*
-	$('#css').blur(function () {
-		$('#saved').slideDown();
-		window.setTimeout(function() {
-			$('#saved').alert('close');
-		}, 5000);
-	});
-*/
 });

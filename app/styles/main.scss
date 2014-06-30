@@ -31,24 +31,25 @@ textarea { height: 60px; }
 .modal-footer a { margin-right: 20px; }
 .prop-input-button { padding: 10px; }
 .remove { color: #333; float: right; position: relative; top: -8px; }
-.slot { background: #C2F2FF; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; border: 1px solid #ADE0DB !important; display: block; height: auto; margin: 0 auto 12px; min-height: 40px; padding: 10px; width: 75%; }
+.slot { background: #C2F2FF; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; border: 1px solid #ADE0DB; display: block; height: auto; margin: 0 auto 12px; min-height: 40px; padding: 10px; width: 75%; }
 .slot img { cursor: pointer; }
 .slot li { min-height: 36px; }
 .slot.dragging { background: #FACEAA !important; border: 1px solid #DED0C1 !important; }
-.sort-placehold { border: 1px dashed #ADE0DB; display: block; height: auto; margin: 0 auto 10px; min-height: 40px; width: 75%; }
+.sort-placehold { border: 1px dashed #ADE0DB !important; display: block; height: auto; margin: 0 auto 12px; min-height: 40px; width: 75%; }
 .tooltip-inner { background: #3b403f; }
 .tooltip.right .tooltip-arrow { border-right-color: #3b403f; }
 
 
-.icon-button, .icon-checkbox, .icon-date, .icon-dropdown, .icon-email, .icon-password, .icon-tel, .icon-radio, .icon-text, .icon-textarea, .icon-url { background: url('/images/sprite.png') 0 0 no-repeat; display: inline-block; height: 36px; text-indent: -9999px; width: 176px; }
+.icon-button, .icon-checkbox, .icon-date, .icon-dropdown, .icon-email, .icon-label, .icon-password, .icon-tel, .icon-radio, .icon-text, .icon-textarea, .icon-url { background: url('/images/sprite.png') 0 0 no-repeat; display: inline-block; height: 36px; text-indent: -9999px; width: 176px; }
 .icon-button { background-position: 0 -280px; }
 .icon-checkbox { background-position: 0 -352px; }
 .icon-date { background-position: 0 -180px; }
 .icon-dropdown { background-position: 0 -390px; }
 .icon-email { background-position: 0 -36px; }
+.icon-label { background-position: 0 -424px; }
 .icon-password { background-position: 0 -144px; }
-.icon-tel { background-position: 0 -72px; }
 .icon-radio { background-position: 0 -316px; }
+.icon-tel { background-position: 0 -72px; }
 .icon-text { background-position: 0 0; }
 .icon-textarea { background-position: 0 -216px; height: 64px; }
 .icon-url { background-position: 0 -108px; }

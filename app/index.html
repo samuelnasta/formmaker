@@ -10,10 +10,6 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<!-- build:css styles/vendor.css -->
-	<!-- bower:css -->
-	<!-- endbower -->
-	<!-- endbuild -->
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
@@ -151,6 +147,7 @@
 				<div class="tab-pane active" id="elements-panel" data-spy="affix" data-offset-top="160">
 					<div class="col-xs-4">
 						<ul id="element-list">
+							<li title="label"><a class="icon icon-label"></a></li>
 							<li title="text"><a class="icon icon-text"></a></li>
 							<li title="email"><a class="icon icon-email"></a></li>
 							<li title="tel"><a class="icon icon-tel"></a></li>
@@ -223,8 +220,6 @@
 							<label><span>Placeholder</span> <input id="password-placeholder" name="password-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
 							<label><span>Min length</span> <input id="password-minlength" name="password-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
 							<label><span>Max length</span> <input id="password-maxlength" name="password-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
-							<label><span>Mask</span> <input id="tel-mask" name="tel-mask" placeholder="(999) 999-9999" type="text"></label>
-
 							<label><span>Validation message</span> <input id="password-error-message" name="password-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
 							<label><span>Required</span> <input checked="false" id="password-required" name="password-required" type="checkbox"></label>
 							<label><span>Confirmation</span> <input checked="false" id="password-confirm" name="password-confirm" type="checkbox"> <small>(check if it's the second password field and must be equal to the first)</small></label>
@@ -252,6 +247,7 @@
 							<label><span>Placeholder</span> <input id="tel-placeholder" name="tel-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
 							<label><span>Min length</span> <input id="tel-minlength" name="tel-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
 							<label><span>Max length</span> <input id="tel-maxlength" name="tel-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Mask</span> <input id="tel-mask" name="tel-mask" placeholder="(999) 999-9999" type="text"></label>
 							<label><span>Validation message</span> <input id="tel-error-message" name="tel-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
 							<label><span>Required</span> <input checked="false" id="tel-required" name="tel-required" type="checkbox"></label>
 						</form>
@@ -316,12 +312,20 @@
 
 
 
+						<!-- Label -->
+						<form id="form-prop-label">
+							<input name="type" type="hidden" value="label">
+							<label><span>Text</span> <input id="label-label" name="label-label" type="text"></label>
+						</form>
+
+
+
 					</div>
 				</div>
 				<div class="tab-pane" id="panel-css">
 					<h2>CSS</h2>
 						<p>Keep in mind that if you rearrange the slots, you must adjust your CSS.<br>
-						So, it's better let it for the end</p>
+						So, <strong>save your form before changing</strong> the CSS</p>
 <textarea id="css" name="css" cols="90" rows="30">
 /* We DO NOT host images, but you can link them from your site */
 
@@ -333,7 +337,7 @@
 
 
 
-@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@import url('http://fonts.googleapis.com/css?family=Montserrat');
 
 body { font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.4; }
 form {  }

@@ -1,8 +1,10 @@
 <?php
 $cicx = new CICX();
 if(isset($_GET['login'])) $cicx->login();
+if(isset($_GET['logout'])) $cicx->logout();
 if(isset($_GET['save'])) $cicx->save();
 if(isset($_GET['signup'])) $cicx->signup();
+if(isset($_GET['me'])) $cicx->me();
 
 
 class Access {
@@ -25,31 +27,46 @@ class CICX extends Access {
 		}
 	}
 
+
+
 	public function login(){
 		$data = array(
 			':email' => $_POST['login-email'],
 			':password' => md5($_POST['login-password'])
 		);
-
 		$query = $this->db
-			->prepare("SELECT COUNT(1) FROM users WHERE email = :email AND password = :password");
+			->prepare("SELECT COUNT(1) as 'count', id FROM users WHERE email = :email AND password = :password");
 		$query->execute($data);
+		$result = $query->fetch(PDO::FETCH_ASSOC);
 
-		$result = $query->fetchColumn();
-		echo $result;
+		session_start();
+		if($result['count']) $_SESSION['user'] = $result['id'];
+		echo $result['count'];
+	}
+
+
+
+	public function logout(){
+		session_start();
+		var_dump($_SESSION);
+		$_SESSION = array();
+ 		session_destroy();
 	}
 
 
 
 	public function save(){
+		session_start();
+		var_dump($_SESSION['user']);
 		$data = array(
-			':user' => $_POST['user'],
-			':form' => json_decode($_POST['form'])[0]
+			':user' => $_SESSION['user'],
+			':form' => serialize(json_decode($_POST['form'],true)),
+			':css' => $_POST['css']
 		);
 
 		@$this->db
-			->prepare("INSERT INTO forms (id_user, form)
-				VALUES (:user, :form)")
+			->prepare("INSERT INTO forms (id_user, form, css)
+				VALUES (:user, :form, :css)")
 			->execute($data);
 	}
 
@@ -65,5 +82,16 @@ class CICX extends Access {
 			->prepare("INSERT INTO users (email, password)
 				VALUES (:email, :password)")
 			->execute($data);
+	}
+
+
+
+	public function me(){
+		$query = $this->db
+			->prepare("SELECT form FROM forms ORDER BY id DESC LIMIT 1");
+		$query->execute();
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+
+		var_dump(unserialize($result['form']));
 	}
 }
