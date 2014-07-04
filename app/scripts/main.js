@@ -214,6 +214,7 @@ $(document).ready(function() {
 	$('a[href=#panel-css]').on('click',function() {
 		$('#slot-container .slot').tooltip('show');
 		window.setTimeout(function() { $('#slot-container .slot').tooltip('hide'); }, 5000);
+		$('#css').focus().select();
 	});
 
 
@@ -252,14 +253,29 @@ $(document).ready(function() {
 					$('#logged').slideUp();
 				}, 5000);
 				$('#menu-login').hide();
-				$('#menu-save').show().attr('disabled', false);
-				$('#menu-logout').show();
+				$('#logged-menu').show();
+				$('#menu-save').attr('disabled', false);
 			} else {
 				window.alert('Login incorrect. Please verify and try again.');
 			}
 		}).fail(function() {
 			window.alert('Ops! Error found! Sorry about that.');
 		});
+	});
+
+
+
+	// Load
+	$('#menu-load').on('click',function() {
+		//
+	});
+
+
+
+	// New form
+	$('#menu-new').on('click',function() {
+		localStorage.clear();
+		document.location.reload();
 	});
 
 
@@ -295,4 +311,18 @@ $(document).ready(function() {
 			window.alert('The passwords doesn\'t match.');
 		}
 	});
+
+
+
+	// Shortcut to press enter
+	$(document).keyup(function(event) {
+		var ESC_KEYCODE = 27;
+		if(event.keyCode === ESC_KEYCODE) {
+			$('#modal-login').modal('hide');
+			$('#modal-signup').modal('hide');
+		}
+	});
+
+
+
 });

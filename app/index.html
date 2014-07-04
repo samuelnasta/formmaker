@@ -67,19 +67,24 @@
 
 <div class="container-fluid">
     <div class="header">
-        <ul class="nav nav-pills pull-right">
-            <li><a href="#" data-toggle="dropdown">Categories <span class="caret"></span></a>
-            	<ul class="dropdown-menu" role="menu">
-                	<li><a href="#">Contact</a></li>
-                	<li><a href="#">General</a></li>
-                	<li><a href="#">Quiz</a></li>
-                	<li><a href="#">Subscription</a></li>
-            	</ul></li>
-            <li><a data-toggle="modal" data-target="#modal-login" id="menu-login">Login to save</a></li>
+        <ul class="nav nav-pills pull-right" id="logged-menu">
+            <li><a id="menu-load" onclick="load()">Load</a></li>
             <li><a accesskey="s" disabled="disabled" id="menu-save" onclick="save()">Save</a></li>
             <li><a id="menu-logout" onclick="logout()">Logout</a></li>
         </ul>
-        <h3 class="text-muted">Formmaker</h3>
+        <ul class="nav nav-pills pull-right">
+			<li><a href="#" data-toggle="dropdown">Categories <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">General</a></li>
+					<li><a href="#">Quiz</a></li>
+					<li><a href="#">Subscription</a></li>
+				</ul>
+			</li>
+            <li><a accesskey="n" id="menu-new" onclick="new()">New</a></li>
+			<li class="active"><a data-toggle="modal" data-target="#modal-login" id="menu-login">Login to save</a></li>
+        </ul>
+        <img id="logo" src="images/logo.png" alt="" height="40" width="250">
     </div>
 
 
@@ -169,7 +174,8 @@
 							<strong>Properties</strong> - Win: Alt+2 | Mac: Control+Option+2<br>
 							<strong>CSS</strong> - Win: Alt+3 | Mac: Control+Option+3<br>
 							<strong>Preview</strong> - Win: Alt+4 | Mac: Control+Option+4<br>
-							<strong>Add new slo</strong>t - Win: Alt+A | Mac: Control+Option+A<br>
+							<strong>Add new slot</strong> - Win: Alt+A | Mac: Control+Option+A<br>
+							<strong>New form</strong> - Win: Alt+N | Mac: Control+Option+N<br>
 							<strong>Save</strong> - Win: Alt+S | Mac: Control+Option+S
 						</p>
 					</div>
@@ -187,14 +193,14 @@
 						<!-- Text -->
 						<form id="form-prop-text">
 							<input name="type" type="hidden" value="text">
-							<label><span>Label</span> <input id="text-label" name="text-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Placeholder</span> <input id="text-placeholder" name="text-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
-							<label><span>Initial value</span> <input id="text-value" name="text-value" placeholder="If you need the input to be pre-filled" type="text"></label>
-							<label><span>Min length</span> <input id="text-minlength" name="text-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
-							<label><span>Max length</span> <input id="text-maxlength" name="text-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
-							<label><span>Mask</span> <input id="text-mask" name="text-mask" placeholder="(999) 999-9999" type="text"></label>
-							<label><span>Validation message</span> <input id="text-error-message" name="text-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="text-required" name="text-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="text_label" name="text_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="text_placeholder" name="text_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="text_value" name="text_value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Min length</span> <input id="text_minlength" name="text_minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="text_maxlength" name="text_maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Mask</span> <input id="text_mask" name="text_mask" placeholder="(999) 999-9999" type="text"></label>
+							<label><span>Validation message</span> <input id="text_error_message" name="text_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="text_required" name="text_required" type="checkbox"></label>
 						</form>
 
 
@@ -202,13 +208,13 @@
 						<!-- Email -->
 						<form id="form-prop-email">
 							<input name="type" type="hidden" value="email">
-							<label><span>Label</span> <input id="email-label" name="email-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Placeholder</span> <input id="email-placeholder" name="email-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
-							<label><span>Initial value</span> <input id="email-value" name="email-value" placeholder="If you need the input to be pre-filled" type="text"></label>
-							<label><span>Min length</span> <input id="email-minlength" name="email-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
-							<label><span>Max length</span> <input id="email-maxlength" name="email-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
-							<label><span>Validation message</span> <input id="email-error-message" name="email-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="email-required" name="email-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="email_label" name="email_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="email_placeholder" name="email_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="email_value" name="email_value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Min length</span> <input id="email_minlength" name="email_minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="email_maxlength" name="email_maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="email_error_message" name="email_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="email_required" name="email_required" type="checkbox"></label>
 						</form>
 
 
@@ -216,13 +222,13 @@
 						<!-- Password -->
 						<form id="form-prop-password">
 							<input name="type" type="hidden" value="password">
-							<label><span>Label</span> <input id="password-label" name="password-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Placeholder</span> <input id="password-placeholder" name="password-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
-							<label><span>Min length</span> <input id="password-minlength" name="password-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
-							<label><span>Max length</span> <input id="password-maxlength" name="password-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
-							<label><span>Validation message</span> <input id="password-error-message" name="password-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="password-required" name="password-required" type="checkbox"></label>
-							<label><span>Confirmation</span> <input checked="false" id="password-confirm" name="password-confirm" type="checkbox"> <small>(check if it's the second password field and must be equal to the first)</small></label>
+							<label><span>Label</span> <input id="password_label" name="password_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="password_placeholder" name="password_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Min length</span> <input id="password_minlength" name="password_minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="password_maxlength" name="password_maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="password_error_message" name="password_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="password_required" name="password_required" type="checkbox"></label>
+							<label><span>Confirmation</span> <input checked="false" id="password_confirm" name="password_confirm" type="checkbox"> <small>(check if it's the second password field and must be equal to the first)</small></label>
 						</form>
 
 
@@ -230,12 +236,12 @@
 						<!-- Url -->
 						<form id="form-prop-url">
 							<input name="type" type="hidden" value="url">
-							<label><span>Label</span> <input id="url-label" name="url-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Placeholder</span> <input id="url-placeholder" name="url-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
-							<label><span>Min length</span> <input id="url-minlength" name="url-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
-							<label><span>Max length</span> <input id="url-maxlength" name="url-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
-							<label><span>Validation message</span> <input id="url-error-message" name="url-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="url-required" name="url-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="url_label" name="url_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="url_placeholder" name="url_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Min length</span> <input id="url_minlength" name="url_minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="url_maxlength" name="url_maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Validation message</span> <input id="url_error_message" name="url_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="url_required" name="url_required" type="checkbox"></label>
 						</form>
 
 
@@ -243,13 +249,13 @@
 						<!-- Tel -->
 						<form id="form-prop-tel">
 							<input name="type" type="hidden" value="tel">
-							<label><span>Label</span> <input id="tel-label" name="tel-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Placeholder</span> <input id="tel-placeholder" name="tel-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
-							<label><span>Min length</span> <input id="tel-minlength" name="tel-minlength" placeholder="8 (leave blank if not required)" type="text"></label>
-							<label><span>Max length</span> <input id="tel-maxlength" name="tel-maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
-							<label><span>Mask</span> <input id="tel-mask" name="tel-mask" placeholder="(999) 999-9999" type="text"></label>
-							<label><span>Validation message</span> <input id="tel-error-message" name="tel-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="tel-required" name="tel-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="tel_label" name="tel_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="tel_placeholder" name="tel_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Min length</span> <input id="tel_minlength" name="tel_minlength" placeholder="8 (leave blank if not required)" type="text"></label>
+							<label><span>Max length</span> <input id="tel_maxlength" name="tel_maxlength" placeholder="30 (leave blank for unlimited)" type="text"></label>
+							<label><span>Mask</span> <input id="tel_mask" name="tel_mask" placeholder="(999) 999-9999" type="text"></label>
+							<label><span>Validation message</span> <input id="tel_error_message" name="tel_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="tel_required" name="tel_required" type="checkbox"></label>
 						</form>
 
 
@@ -257,10 +263,10 @@
 						<!-- Radio -->
 						<form id="form-prop-radio">
 							<input name="type" type="hidden" value="radio">
-							<label><span>Label</span> <input id="radio-label" name="radio-label" placeholder="What will be after the radio" type="text"></label>
-							<label><span>Options <small>(one per line)</small></span> <textarea id="radio-options" name="radio-options"></textarea></label>
-							<label><span>Validation message</span> <input id="radio-error-message" name="radio-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="radio-required" name="radio-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="radio_label" name="radio_label" placeholder="What will be after the radio" type="text"></label>
+							<label><span>Options <small>(one per line)</small></span> <textarea id="radio_options" name="radio_options"></textarea></label>
+							<label><span>Validation message</span> <input id="radio_error_message" name="radio_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="radio_required" name="radio_required" type="checkbox"></label>
 						</form>
 
 
@@ -268,10 +274,10 @@
 						<!-- Checkbox -->
 						<form id="form-prop-checkbox">
 							<input name="type" type="hidden" value="checkbox">
-							<label><span>Label</span> <input id="checkbox-label" name="checkbox-label" placeholder="What will be after the checkbox" type="text"></label>
-							<label><span>Options <small>(one per line)</small></span> <textarea id="checkbox-options" name="checkbox-options"></textarea></label>
-							<label><span>Validation message</span> <input id="checkbox-error-message" name="checkbox-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="checkbox-required" name="checkbox-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="checkbox_label" name="checkbox_label" placeholder="What will be after the checkbox" type="text"></label>
+							<label><span>Options <small>(one per line)</small></span> <textarea id="checkbox_options" name="checkbox_options"></textarea></label>
+							<label><span>Validation message</span> <input id="checkbox_error_message" name="checkbox_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="checkbox_required" name="checkbox_required" type="checkbox"></label>
 						</form>
 
 
@@ -279,11 +285,11 @@
 						<!-- Dropdown -->
 						<form id="form-prop-dropdown">
 							<input name="type" type="hidden" value="dropdown">
-							<label><span>Label</span> <input id="dropdown-label" name="dropdown-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Placeholder</span> <input id="dropdown-placeholder" name="dropdown-placeholder" placeholder="Please select something..." type="text"></label>
-							<label><span>Options <small>(one per line)</small></span> <textarea id="dropdown-options" name="dropdown-options"></textarea></label>
-							<label><span>Validation message</span> <input id="dropdown-error-message" name="dropdown-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="dropdown-required" name="dropdown-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="dropdown_label" name="dropdown_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="dropdown_placeholder" name="dropdown_placeholder" placeholder="Please select something..." type="text"></label>
+							<label><span>Options <small>(one per line)</small></span> <textarea id="dropdown_options" name="dropdown_options"></textarea></label>
+							<label><span>Validation message</span> <input id="dropdown_error_message" name="dropdown_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="dropdown_required" name="dropdown_required" type="checkbox"></label>
 						</form>
 
 
@@ -291,13 +297,13 @@
 						<!-- Textarea -->
 						<form id="form-prop-textarea">
 							<input name="type" type="hidden" value="textarea">
-							<label><span>Label</span> <input id="textarea-label" name="textarea-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Placeholder</span> <input id="textarea-placeholder" name="textarea-placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
-							<label><span>Initial value</span> <input id="textarea-value" name="textarea-value" placeholder="If you need the input to be pre-filled" type="text"></label>
-							<label><span>Height</span> <input id="textarea-height" name="textarea-height" placeholder="(in pixels)" type="text"></label>
-							<label><span>Width</span> <input id="textarea-width" name="textarea-width" placeholder="(in pixels)" type="text"></label>
-							<label><span>Validation message</span> <input id="textarea-error-message" name="textarea-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input checked="false" id="textarea-required" name="textarea-required" type="checkbox"></label>
+							<label><span>Label</span> <input id="textarea_label" name="textarea_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Placeholder</span> <input id="textarea_placeholder" name="textarea_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
+							<label><span>Initial value</span> <input id="textarea_value" name="textarea_value" placeholder="If you need the input to be pre-filled" type="text"></label>
+							<label><span>Height</span> <input id="textarea_height" name="textarea_height" placeholder="(in pixels)" type="text"></label>
+							<label><span>Width</span> <input id="textarea_width" name="textarea_width" placeholder="(in pixels)" type="text"></label>
+							<label><span>Validation message</span> <input id="textarea_error_message" name="textarea_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input checked="false" id="textarea_required" name="textarea_required" type="checkbox"></label>
 						</form>
 
 
@@ -305,9 +311,9 @@
 						<!-- Button -->
 						<form id="form-prop-button">
 							<input name="type" type="hidden" value="button">
-							<label><span>Value</span> <input id="button-label" name="button-label" placeholder="What will be before the input" type="text"></label>
-							<label><span>Validation message</span> <input id="button-error-message" name="button-error-message" placeholder="If any validation error is found, show this to user" type="text"></label>
-							<label><span>Required</span> <input id="button-required" name="button-required" type="checkbox"></label>
+							<label><span>Value</span> <input id="button_label" name="button_label" placeholder="What will be before the input" type="text"></label>
+							<label><span>Validation message</span> <input id="button_error_message" name="button_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
+							<label><span>Required</span> <input id="button_required" name="button_required" type="checkbox"></label>
 						</form>
 
 
@@ -315,7 +321,7 @@
 						<!-- Label -->
 						<form id="form-prop-label">
 							<input name="type" type="hidden" value="label">
-							<label><span>Text</span> <input id="label-label" name="label-label" type="text"></label>
+							<label><span>Text</span> <input id="label_label" name="label_label" type="text"></label>
 						</form>
 
 
@@ -326,24 +332,32 @@
 					<h2>CSS</h2>
 						<p>Keep in mind that if you rearrange the slots, you must adjust your CSS.<br>
 						So, <strong>save your form before changing</strong> the CSS</p>
-<textarea id="css" name="css" cols="90" rows="30">
-/* We DO NOT host images, but you can link them from your site */
 
-/* ******* */
-/* Example */
-/* ******* */
-
+<pre>
+/**************************************************************************/
+/*                                                                        */
+/*      We DO NOT host images, but you can link them from your site       */
+/*                                                                        */
+/* EXAMPLE                                                                */
 /* form { background: url('http://www.yoursite.com/images/submit.png'); } */
+/*                                                                        */
+/*                                                                        */
+/*     Below is the default CSS       Feel free to change as you want     */
+/*                                                                        */
+/**************************************************************************/
+</pre>
+<textarea id="css" name="css" cols="90" rows="30">
+@import url('http://fonts.googleapis.com/css?family=Open+Sans');
 
+body { color: #666; font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 1.4; }
+div { display: block; margin-bottom: 20px; width: 100%; }
+input[type=email], input[type=password], input[type=tel], input[type=text], input[type=url], textarea { border: 1px solid #999; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-size: 16px; line-height: 1.6em; padding: 5px 10px; width: 400px; }
+input[type=checkbox], input[type=radio] { margin-right: 10px; padding: 5px 10px; width: auto; }
+label { display: block; width: 250px; }
+textarea { height: 100px; }
 
-
-@import url('http://fonts.googleapis.com/css?family=Montserrat');
-
-body { font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.4; }
-form {  }
-form h1 { font-size: 28px; }
-input { width: 200px; }
-input[type=submit] { background: url('http://www.yoursite.com/images/submit.png'); }
+.error { border: 1px solid red; color: red; display: none; padding: 5px 10px; width: 400px; }
+.label { color: #212121; font-size: 115%; font-weight: bold; }
 
 #slot-1 { }
 #slot-2 { }
@@ -355,8 +369,6 @@ input[type=submit] { background: url('http://www.yoursite.com/images/submit.png'
 #slot-8 { }
 #slot-9 { }
 #slot-10 { }
-
-#slot-1, #slot-2 { float: left; width: 50%; }
 </textarea>
 				</div>
 				<div class="tab-pane" id="panel-preview">
