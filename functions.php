@@ -1,10 +1,11 @@
 <?php
-$cicx = new CICX();
-if(isset($_GET['login'])) $cicx->login();
-if(isset($_GET['logout'])) $cicx->logout();
-if(isset($_GET['save'])) $cicx->save();
-if(isset($_GET['signup'])) $cicx->signup();
-if(isset($_GET['preview'])) $cicx->preview();
+//require_once('connect.class.php');
+$formmaker = new FormMaker();
+if(isset($_GET['login'])) $formmaker->login();
+if(isset($_GET['logout'])) $formmaker->logout();
+if(isset($_GET['save'])) $formmaker->save();
+if(isset($_GET['signup'])) $formmaker->signup();
+if(isset($_GET['preview'])) $formmaker->preview();
 
 
 class Access {
@@ -16,7 +17,8 @@ class Access {
 }
 
 
-class CICX extends Access {
+
+class FormMaker extends Access {
 
 	# Create the PDO database object
     public function __construct() {
@@ -111,7 +113,8 @@ class CICX extends Access {
 				if($key === 'type'):
 					$type = $val;
 				else:
-					$attribute = explode('_', $key)[1];
+					$temp_attribute = explode('_', $key);
+					if(is_array($temp_attribute)) $attribute = $temp_attribute[1];
 					$$attribute = $val;
 				endif;
 
