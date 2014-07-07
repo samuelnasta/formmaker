@@ -145,8 +145,9 @@
 				<li class="active"><a href="#elements-panel" accesskey="1" data-toggle="tab" title="[Shortcut] Win: Alt+1 | Mac: Control+Option+1">Elements</a></li>
 				<li><a href="#panel-prop" accesskey="2" data-toggle="tab" title="[Shortcut] Win: Alt+2 | Mac: Control+Option+2">Properties</a></li>
 				<li><a href="#panel-css" accesskey="3" data-toggle="tab" title="[Shortcut] Win: Alt+3 | Mac: Control+Option+3">CSS</a></li>
-				<li><a href="#panel-preview" accesskey="4" data-toggle="tab" title="[Shortcut] Win: Alt+4 | Mac: Control+Option+4">Preview</a></li>
+<!-- 				<li><a href="#panel-preview" accesskey="4" data-toggle="tab" title="[Shortcut] Win: Alt+4 | Mac: Control+Option+4">Preview</a></li> -->
 			</ul>
+			<a accesskey="p" class="btn btn-success" id="menu-preview">Preview</a>
 			
 			<div class="tab-content">
 				<div class="tab-pane active" id="elements-panel" data-spy="affix" data-offset-top="160">
@@ -173,9 +174,9 @@
 							<strong>Elements</strong> - Win: Alt+1 | Mac: Control+Option+1<br>
 							<strong>Properties</strong> - Win: Alt+2 | Mac: Control+Option+2<br>
 							<strong>CSS</strong> - Win: Alt+3 | Mac: Control+Option+3<br>
-							<strong>Preview</strong> - Win: Alt+4 | Mac: Control+Option+4<br>
 							<strong>Add new slot</strong> - Win: Alt+A | Mac: Control+Option+A<br>
 							<strong>New form</strong> - Win: Alt+N | Mac: Control+Option+N<br>
+							<strong>Preview</strong> - Win: Alt+P | Mac: Control+Option+P (turn off popup blockers)<br>
 							<strong>Save</strong> - Win: Alt+S | Mac: Control+Option+S
 						</p>
 					</div>
@@ -359,6 +360,7 @@ textarea { height: 100px; }
 .error { border: 1px solid red; color: red; display: none; padding: 5px 10px; width: 400px; }
 .label { color: #212121; font-size: 115%; font-weight: bold; }
 
+#container { }
 #slot-1 { }
 #slot-2 { }
 #slot-3 { }
@@ -371,10 +373,12 @@ textarea { height: 100px; }
 #slot-10 { }
 </textarea>
 				</div>
+<!--
 				<div class="tab-pane" id="panel-preview">
 					<h2>Preview</h2>
-					<div id="preview"></div>
+ 					<div id="preview"></div>
 				</div>
+-->
 			</div>
 		</div>
 	</div>

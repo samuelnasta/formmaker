@@ -3,9 +3,10 @@
 $formmaker = new FormMaker();
 if(isset($_GET['login'])) $formmaker->login();
 if(isset($_GET['logout'])) $formmaker->logout();
+if(isset($_GET['preview'])) $formmaker->preview();
 if(isset($_GET['save'])) $formmaker->save();
 if(isset($_GET['signup'])) $formmaker->signup();
-if(isset($_GET['preview'])) $formmaker->preview();
+
 
 
 class Access {
@@ -50,7 +51,6 @@ class FormMaker extends Access {
 
 	public function logout(){
 		session_start();
-		var_dump($_SESSION);
 		$_SESSION = array();
  		session_destroy();
 	}
@@ -93,11 +93,16 @@ class FormMaker extends Access {
 
 
 	public function preview(){
-		header("Content-Type application/json; charset=utf-8");
-		$query = $this->db
-			->prepare("SELECT css, form FROM forms WHERE id = {$_GET['preview']}");
-		$query->execute();
-		$result = $query->fetch(PDO::FETCH_ASSOC);
+		if(isset($_GET['preview']) && $_GET['preview'] !== ''):
+			$query = $this->db
+				->prepare("SELECT css, form FROM forms WHERE id = {$_GET['preview']}");
+			$query->execute();
+			$result = $query->fetch(PDO::FETCH_ASSOC);
+		else:
+			$result['css'] = $_POST['css'];
+			$result['form'] = serialize(json_decode($_POST['form']));
+		endif;
+
 
 		$default_error_msg = '<label class="error">This field is required.</label>';
 		$forms = unserialize($result['form']);
@@ -136,6 +141,7 @@ class FormMaker extends Access {
 			if(isset($form->{$type . '_options'}) && $form->{$type . '_options'} !== NULL):
 				$options = explode("\n",$options);
 			endif;
+
 
 
 			// Generates the final HTML
@@ -239,8 +245,6 @@ $generated_form
 </body>
 </html>
 HEREDOC;
-
 		echo $html;
-//		var_dump($forms);
 	}
 }

@@ -195,14 +195,17 @@ $(document).ready(function() {
 
 
 	// Preview the form
-	$('a[href=#panel-preview]').on('click',function() {
+	$('#menu-preview').on('click',function() {
 		var JSONArray = JSON.stringify(window.tempArray);
 		window.load();
-		$.post('http://formmaker:8888/preview.php', {
+		$.post('http://formmaker:8888/functions.php?preview', {
 			'form': JSONArray,
 			'css' : $('#css').val()
 		}).done(function(data) {
-			$('#preview').html(data);
+		    var preview = window.open('about:blank');
+			preview.document.open();
+			preview.document.write(data);
+			preview.document.close();
 		}).fail(function() {
 			window.alert('Ops! Error found! Sorry about that.');
 		});
