@@ -5,6 +5,8 @@ if(isset($_GET['load'])) $formmaker->load();
 if(isset($_GET['loadlist'])) $formmaker->loadlist();
 if(isset($_GET['login'])) $formmaker->login();
 if(isset($_GET['logout'])) $formmaker->logout();
+if(isset($_GET['menu'])) $formmaker->menu();
+if(isset($_GET['newform'])) $formmaker->newform();
 if(isset($_GET['preview'])) $formmaker->preview();
 if(isset($_GET['save'])) $formmaker->save();
 if(isset($_GET['signup'])) $formmaker->signup();
@@ -104,6 +106,27 @@ document.location.reload();
 		session_start();
 		$_SESSION = array();
  		session_destroy();
+	}
+
+
+
+	public function menu(){
+		session_start();
+		if(isset($_SESSION['user']) && $_SESSION['user'] !== ''):
+?>
+$('#menu-login').hide();
+$('#logged-menu').show();
+$('#menu-save').attr('disabled', false);
+<?php
+		endif;
+	}
+
+
+
+	public function newform(){
+		session_start();
+		if(isset($_SESSION['id_form']) && $_SESSION['id_form'] !== '') $_SESSION['id_form'] = NULL;
+		header('location: http://formmaker:8888/dist');
 	}
 
 

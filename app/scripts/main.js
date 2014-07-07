@@ -16,6 +16,7 @@ $(document).ready(function() {
 	});
 
 	window.start = function() {
+		$.getScript('http://formmaker:8888/functions.php?menu').done(function(data) { return data; });
 		window.load();
 		$('.jumbotron').fadeOut('fast');
 		$('#panel-form').disableSelection();
@@ -308,7 +309,7 @@ $(document).ready(function() {
 	// New form
 	$('#menu-new').on('click',function() {
 		localStorage.clear();
-		document.location.reload();
+		document.location.href = 'http://formmaker:8888/functions.php?newform';
 	});
 
 
