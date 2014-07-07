@@ -45,12 +45,12 @@
 			</div>
 			<div class="modal-body">
 				<form id="form-login">
-					<input class="form-control" id="login-email" placeholder="Email" type="email" required><br>
+					<input autofocus class="form-control" id="login-email" placeholder="Email" type="email" required><br>
 					<input class="form-control" id="login-password" placeholder="Password" type="password" required>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<a href="#" data-toggle="modal" data-target="#modal-signup" onclick="$('#modal-login').modal('hide')">Sign up</a>
+				<a href="#" data-toggle="modal" data-target="#modal-signup" id="menu-signup">Sign up</a>
 				<button class="btn btn-primary" id="submit-login">Login</button>
 			</div>
 		</div>
@@ -133,7 +133,7 @@
 		<div class="col-xs-5">
 			<div class="tab-content">
 				<div class="tab-pane active" id="panel-form">
-					<h2 class="text-center">Drop the elements of your form below</h2>
+					<h2 class="text-center" id="title" data-trigger="hover" data-toggle="tooltip" data-placement="top" title="Click here to change">Untitled form</h2>
 					<div id="slot-container">
 						<div id="slot-1" class="slot free" data-toggle="tooltip" data-placement="right" title="#slot-1"><span></span></div>
 						<div id="slot-2" class="slot free" data-toggle="tooltip" data-placement="right" title="#slot-2"><span></span></div>

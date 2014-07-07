@@ -214,6 +214,7 @@ $(document).ready(function() {
 			preview.document.open();
 			preview.document.write(data);
 			preview.document.close();
+			preview.document.focus();
 		}).fail(function() {
 			window.alert('Ops! Error found! Sorry about that.');
 		});
@@ -250,32 +251,6 @@ $(document).ready(function() {
 
 
 
-	// Login
-	$('#submit-login').on('click',function() {
-		$('#modal-login').modal('hide');
-
-		$.post('http://formmaker:8888/functions.php?login', {
-			'login-email': $('#login-email').val(),
-			'login-password': $('#login-password').val()
-		}, function(data) {
-			if(parseInt(data) === 1) {
-				$('#logged').slideDown();
-				window.setTimeout(function() {
-					$('#logged').slideUp();
-				}, 5000);
-				$('#menu-login').hide();
-				$('#logged-menu').show();
-				$('#menu-save').attr('disabled', false);
-			} else {
-				window.alert('Login incorrect. Please verify and try again.');
-			}
-		}).fail(function() {
-			window.alert('Ops! Error found! Sorry about that.');
-		});
-	});
-
-
-
 	// Load list of links of saved forms
 	$('#load-list').on('click','a',function() {
 		$('#modal-load').modal('hide');
@@ -306,10 +281,46 @@ $(document).ready(function() {
 
 
 
+	// Opens sign-up modal
+	$('#menu-signup').on('click', function() {
+		$('#modal-login').modal('hide');
+	});
+	$('#modal-signup').on('shown.bs.modal', function() {
+		$('#signup-email').focus();
+	});
+
+
+
 	// New form
 	$('#menu-new').on('click',function() {
 		localStorage.clear();
 		document.location.href = 'http://formmaker:8888/functions.php?newform';
+	});
+
+
+
+	// Login
+	$('#submit-login').on('click',function() {
+		$('#modal-login').modal('hide');
+
+		$.post('http://formmaker:8888/functions.php?login', {
+			'login-email': $('#login-email').val(),
+			'login-password': $('#login-password').val()
+		}, function(data) {
+			if(parseInt(data) === 1) {
+				$('#logged').slideDown();
+				window.setTimeout(function() {
+					$('#logged').slideUp();
+				}, 5000);
+				$('#menu-login').hide();
+				$('#logged-menu').show();
+				$('#menu-save').attr('disabled', false);
+			} else {
+				window.alert('Login incorrect. Please verify and try again.');
+			}
+		}).fail(function() {
+			window.alert('Ops! Error found! Sorry about that.');
+		});
 	});
 
 
@@ -348,15 +359,43 @@ $(document).ready(function() {
 
 
 
-	// Shortcut to press enter
+	// Change form title
+	$('#panel-form').on('mouseover','#title',function() {
+		$('#title').tooltip();
+	});
+	$('#panel-form').on('click','#title',function() {
+		$('#title').tooltip('destroy');
+		$(this).replaceWith('<input class="form-control" id="title" type="text" value="' + $(this).text() + '"/>');
+		$('#title').focus();
+		$('#title').keyup(function(event) {
+			if(event.keyCode === window.ENTER_KEYCODE) {
+				$('#title').blur();
+			}
+		});
+	});
+	$('#panel-form').on('blur','#title',function() {
+		localStorage.title = $(this).val();
+		$(this).replaceWith('<h2 class="text-center" id="title" data-toggle="tooltip" data-placement="top" title="Click here to change">' + $(this).val() + '</h2>');
+	});
+
+
+	// Shortcuts
+	window.ENTER_KEYCODE = 13;
+	window.ESC_KEYCODE = 27;
+
 	$(document).keyup(function(event) {
-		var ESC_KEYCODE = 27;
-		if(event.keyCode === ESC_KEYCODE) {
+		if(event.keyCode === window.ESC_KEYCODE) {
 			$('#modal-login').modal('hide');
 			$('#modal-signup').modal('hide');
 		}
 	});
 
+	$('#modal-login').keyup(function(event) {
+		if(event.keyCode === window.ENTER_KEYCODE) {
+			$('#submit-login').click();
+		}
+	});
 
+	
 
 });
