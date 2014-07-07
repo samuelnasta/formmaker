@@ -1,6 +1,8 @@
 <?php
 //require_once('connect.class.php');
 $formmaker = new FormMaker();
+if(isset($_GET['load'])) $formmaker->load();
+if(isset($_GET['loadlist'])) $formmaker->loadlist();
 if(isset($_GET['login'])) $formmaker->login();
 if(isset($_GET['logout'])) $formmaker->logout();
 if(isset($_GET['preview'])) $formmaker->preview();
@@ -28,6 +30,55 @@ class FormMaker extends Access {
 		} catch (PDOException $e) {
 			file_put_contents('PDOErrors.txt', date('d-m-Y H:i:s') . ' - ' . $e->getMessage() . "\r\n", FILE_APPEND);
 		}
+	}
+
+
+
+	public function load(){
+		session_start();
+		$query = $this->db
+			->prepare("SELECT title, form, css FROM forms WHERE id = {$_GET['load']} AND id_user = {$_SESSION['user']}");
+		$query->execute();
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+
+		if(!empty($result)):
+			$_SESSION['id_form'] = $_GET['load'];
+			$i = 0; $order = '';
+			$forms = unserialize($result['form']);
+			$title = (isset($result['title']) && !empty($result['title'])) ? $result['title'] : 'Untitled';
+?>
+localStorage.clear();
+localStorage.title = <?php echo "\"$title\""; ?>;
+localStorage.css = <?php echo json_encode($result['css']); ?>;
+<?php
+			foreach($forms as $form):
+				$i++;
+				$order .= "slot-$i,";
+				echo "localStorage['slot-$i'] = '$form';\n";
+			endforeach;
+?>
+localStorage.order = "<?php echo substr($order,0,-1); ?>";
+window.load();
+document.location.reload();
+<?php
+		endif;
+	}
+
+
+
+	public function loadlist(){
+		session_start();
+		$query = $this->db
+			->prepare("SELECT id, title FROM forms WHERE id_user = {$_SESSION['user']}");
+		$query->execute();
+		$result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+		echo "<h5>Choose a form to load</h5><ul>";
+		foreach($result as $row):
+			$title = (isset($row['title']) && !empty($row['title'])) ? $row['title'] : 'Untitled';
+			echo "<li><a data-id=\"{$row['id']}\" href=\"javascript:;\">{$title}</a></li>\n";
+		endforeach;
+		echo "</ul>";
 	}
 
 
@@ -226,15 +277,6 @@ class FormMaker extends Access {
 <title>Forms made easy - FormMaker</title>
 <meta name="viewport" content="width=device-width">
 <style>
-body { color: #666; font-size: 16px; line-height: 1.4em; }
-div { display: block; margin-bottom: 20px; width: 100%; }
-input[type=email], input[type=password], input[type=tel], input[type=text], input[type=url], textarea { border: 1px solid #999; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-size: 16px; line-height: 1.6em; padding: 5px 10px; width: 400px; }
-input[type=checkbox], input[type=radio] { margin-right: 10px; padding: 5px 10px; width: auto; }
-label { display: block; width: 250px; }
-textarea { height: 100px; }
-
-.error { border: 1px solid red; color: red; display: none; padding: 5px 10px; width: 400px; }
-.label { color: #212121; font-size: 115%; font-weight: bold; }
 {$result['css']}
 </style>
 </head>

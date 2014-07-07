@@ -21,6 +21,21 @@
 <![endif]-->
 
 
+<div class="modal fade" id="modal-load">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Load</h4>
+			</div>
+			<div class="modal-body">
+				<div id="load-list"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal fade" id="modal-login">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
@@ -68,7 +83,7 @@
 <div class="container-fluid">
     <div class="header">
         <ul class="nav nav-pills pull-right" id="logged-menu">
-            <li><a id="menu-load" onclick="load()">Load</a></li>
+            <li><a id="menu-load">Load</a></li>
             <li><a accesskey="s" disabled="disabled" id="menu-save" onclick="save()">Save</a></li>
             <li><a id="menu-logout" onclick="logout()">Logout</a></li>
         </ul>
@@ -89,13 +104,13 @@
 
 
 
-	<div class="saved alert alert-success fade in" id="saved">
-		<button type="button" class="close" data-dismiss="saved" aria-hidden="true">×</button>
+	<div class="saved alert alert-success fade in" id="saved" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<strong>Form saved</strong>
 	</div>
 
-	<div class="logged alert alert-success fade in" id="logged">
-		<button type="button" class="close" data-dismiss="logged" aria-hidden="true">×</button>
+	<div class="logged alert alert-success fade in" id="logged" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<strong>You are logged in.</strong>
 	</div>
 
@@ -357,7 +372,7 @@ input[type=checkbox], input[type=radio] { margin-right: 10px; padding: 5px 10px;
 label { display: block; width: 250px; }
 textarea { height: 100px; }
 
-.error { border: 1px solid red; color: red; display: none; padding: 5px 10px; width: 400px; }
+.error { border: 1px solid red; color: red; padding: 5px 10px; width: 400px; }
 .label { color: #212121; font-size: 115%; font-weight: bold; }
 
 #container { }
@@ -388,7 +403,6 @@ textarea { height: 100px; }
     </div>
 
 </div>
-
 
 
 <!-- build:js scripts/vendor.js -->

@@ -8,6 +8,7 @@ if (!Modernizr.localstorage) {
 
 $(document).ready(function() {
 	window.sortIcon = '<i class="glyphicon glyphicon-move"></i>';
+	window.tempCSS = null;
 
 	$('.jumbotron .loading').fadeOut('fast', function() {
 		$('#start').fadeIn('slow');
@@ -35,9 +36,15 @@ $(document).ready(function() {
 			// Removes empty elements
 			window.tempArray = window.tempArray.filter(function(e) { return e; });
 
+			// Remembers the CSS saved
+			if(localStorage.getItem('css')) { window.tempCSS = localStorage.getItem('css'); }
 
 			localStorage.clear();
 
+			if(window.tempCSS) {
+				$('#css').html(window.tempCSS);
+				localStorage.css = window.tempCSS;
+			}
 
 			// Returns the final object with optimized sorting
 			var finalObj = {};
@@ -268,9 +275,32 @@ $(document).ready(function() {
 
 
 
-	// Load
+	// Load list of links of saved forms
+	$('#load-list').on('click','a',function() {
+		$('#modal-load').modal('hide');
+
+
+		$.getScript('http://formmaker:8888/functions.php?load=' + $(this).attr('data-id'))
+			.done(function(data) {
+				return data;
+			})
+			.fail(function() {
+				window.alert('Ops! Error found! Sorry about that.');
+			});
+	});
+
+
+
+	// Load list of links of saved forms
 	$('#menu-load').on('click',function() {
-		//
+		$('#modal-load').modal('show');
+
+		$.post('http://formmaker:8888/functions.php?loadlist'
+			).done(function(data) {
+				$('#load-list').html(data);
+			}).fail(function() {
+				window.alert('Ops! Error found! Sorry about that.');
+			});
 	});
 
 
@@ -287,8 +317,8 @@ $(document).ready(function() {
 	$('#menu-logout').on('click',function() {
 		$.post('http://formmaker:8888/functions.php?logout', function() {
 			$('#menu-login').show();
-			$('#menu-save').hide().attr('disabled', true);
-			$('#menu-logout').hide();
+			$('#logged-menu').hide();
+			$('#menu-save').attr('disabled', true);
 		}).fail(function() {
 			window.alert('Ops! Error found! Sorry about that.');
 		});
