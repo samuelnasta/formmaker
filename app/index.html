@@ -134,6 +134,19 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="panel-form">
 					<h2 class="text-center" id="title" data-trigger="hover" data-toggle="tooltip" data-placement="top" title="Click here to change">Untitled form</h2>
+					<div id="form-settings">
+						<label><input id="public" checked type="checkbox"> This form is public</label>
+						<label>
+							<select id="category">
+								<option disabled selected>Select a category</option>
+								<option>Contact</option>
+								<option>General</option>
+								<option>Quiz</option>
+								<option>Subscription</option>
+							</select>
+						</label>
+					</div>
+					
 					<div id="slot-container">
 						<div id="slot-1" class="slot free" data-toggle="tooltip" data-placement="right" title="#slot-1"><span></span></div>
 						<div id="slot-2" class="slot free" data-toggle="tooltip" data-placement="right" title="#slot-2"><span></span></div>
@@ -207,7 +220,7 @@
 
 
 						<!-- Text -->
-						<form id="form-prop-text">
+						<form id="form-prop-text" onsubmit="return false;">
 							<input name="type" type="hidden" value="text">
 							<label><span>Label</span> <input id="text_label" name="text_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="text_placeholder" name="text_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
@@ -222,7 +235,7 @@
 
 
 						<!-- Email -->
-						<form id="form-prop-email">
+						<form id="form-prop-email" onsubmit="return false;">
 							<input name="type" type="hidden" value="email">
 							<label><span>Label</span> <input id="email_label" name="email_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="email_placeholder" name="email_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
@@ -236,7 +249,7 @@
 
 
 						<!-- Password -->
-						<form id="form-prop-password">
+						<form id="form-prop-password" onsubmit="return false;">
 							<input name="type" type="hidden" value="password">
 							<label><span>Label</span> <input id="password_label" name="password_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="password_placeholder" name="password_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
@@ -250,7 +263,7 @@
 
 
 						<!-- Url -->
-						<form id="form-prop-url">
+						<form id="form-prop-url" onsubmit="return false;">
 							<input name="type" type="hidden" value="url">
 							<label><span>Label</span> <input id="url_label" name="url_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="url_placeholder" name="url_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
@@ -263,7 +276,7 @@
 
 
 						<!-- Tel -->
-						<form id="form-prop-tel">
+						<form id="form-prop-tel" onsubmit="return false;">
 							<input name="type" type="hidden" value="tel">
 							<label><span>Label</span> <input id="tel_label" name="tel_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="tel_placeholder" name="tel_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
@@ -277,7 +290,7 @@
 
 
 						<!-- Radio -->
-						<form id="form-prop-radio">
+						<form id="form-prop-radio" onsubmit="return false;">
 							<input name="type" type="hidden" value="radio">
 							<label><span>Label</span> <input id="radio_label" name="radio_label" placeholder="What will be after the radio" type="text"></label>
 							<label><span>Options <small>(one per line)</small></span> <textarea id="radio_options" name="radio_options"></textarea></label>
@@ -288,7 +301,7 @@
 
 
 						<!-- Checkbox -->
-						<form id="form-prop-checkbox">
+						<form id="form-prop-checkbox" onsubmit="return false;">
 							<input name="type" type="hidden" value="checkbox">
 							<label><span>Label</span> <input id="checkbox_label" name="checkbox_label" placeholder="What will be after the checkbox" type="text"></label>
 							<label><span>Options <small>(one per line)</small></span> <textarea id="checkbox_options" name="checkbox_options"></textarea></label>
@@ -299,7 +312,7 @@
 
 
 						<!-- Dropdown -->
-						<form id="form-prop-dropdown">
+						<form id="form-prop-dropdown" onsubmit="return false;">
 							<input name="type" type="hidden" value="dropdown">
 							<label><span>Label</span> <input id="dropdown_label" name="dropdown_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="dropdown_placeholder" name="dropdown_placeholder" placeholder="Please select something..." type="text"></label>
@@ -311,7 +324,7 @@
 
 
 						<!-- Textarea -->
-						<form id="form-prop-textarea">
+						<form id="form-prop-textarea" onsubmit="return false;">
 							<input name="type" type="hidden" value="textarea">
 							<label><span>Label</span> <input id="textarea_label" name="textarea_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Placeholder</span> <input id="textarea_placeholder" name="textarea_placeholder" placeholder="If you rather put the label inside the input" type="text"></label>
@@ -325,7 +338,7 @@
 
 
 						<!-- Button -->
-						<form id="form-prop-button">
+						<form id="form-prop-button" onsubmit="return false;">
 							<input name="type" type="hidden" value="button">
 							<label><span>Value</span> <input id="button_label" name="button_label" placeholder="What will be before the input" type="text"></label>
 							<label><span>Validation message</span> <input id="button_error_message" name="button_error_message" placeholder="If any validation error is found, show this to user" type="text"></label>
@@ -335,7 +348,7 @@
 
 
 						<!-- Label -->
-						<form id="form-prop-label">
+						<form id="form-prop-label" onsubmit="return false;">
 							<input name="type" type="hidden" value="label">
 							<label><span>Text</span> <input id="label_label" name="label_label" type="text"></label>
 						</form>

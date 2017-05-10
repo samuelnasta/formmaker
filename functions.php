@@ -1,6 +1,7 @@
 <?php
 //require_once('connect.class.php');
 $formmaker = new FormMaker();
+if(isset($_GET['delete'])) $formmaker->delete();
 if(isset($_GET['load'])) $formmaker->load();
 if(isset($_GET['loadlist'])) $formmaker->loadlist();
 if(isset($_GET['login'])) $formmaker->login();
@@ -36,10 +37,23 @@ class FormMaker extends Access {
 
 
 
+	public function delete(){
+		session_start();
+		$data = array(
+			':delete' => $_GET['delete'],
+			':user' => $_SESSION['user']
+		);
+		$query = $this->db
+			->prepare("DELETE FROM forms WHERE id = :delete AND id_user = :user");
+		$query->execute($data);
+	}
+
+
+
 	public function load(){
 		session_start();
 		$query = $this->db
-			->prepare("SELECT title, form, css FROM forms WHERE id = {$_GET['load']} AND id_user = {$_SESSION['user']}");
+			->prepare("SELECT title, form, css, public FROM forms WHERE id = {$_GET['load']} AND id_user = {$_SESSION['user']}");
 		$query->execute();
 		$result = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -48,6 +62,7 @@ class FormMaker extends Access {
 			$i = 0; $order = '';
 			$forms = unserialize($result['form']);
 			$title = (isset($result['title']) && !empty($result['title'])) ? $result['title'] : 'Untitled';
+			$public = (isset($result['public']) && $result['public'] == 1) ? 'true' : 'false';
 ?>
 localStorage.clear();
 localStorage.title = <?php echo "\"$title\""; ?>;
@@ -60,6 +75,7 @@ localStorage.css = <?php echo json_encode($result['css']); ?>;
 			endforeach;
 ?>
 localStorage.order = "<?php echo substr($order,0,-1); ?>";
+localStorage.public = "<?php echo $public; ?>";
 window.load();
 document.location.reload();
 <?php
@@ -78,7 +94,7 @@ document.location.reload();
 		echo "<h5>Choose a form to load</h5><ul>";
 		foreach($result as $row):
 			$title = (isset($row['title']) && !empty($row['title'])) ? $row['title'] : 'Untitled';
-			echo "<li><a data-id=\"{$row['id']}\" href=\"javascript:;\">{$title}</a></li>\n";
+			echo "<li><a data-id=\"{$row['id']}\" href=\"javascript:;\">{$title}</a><i class=\"delete glyphicon glyphicon-remove\" data-id=\"{$row['id']}\" onclick=\"deleteForm(this)\" title=\"Delete this form\"></i></li>\n";
 		endforeach;
 		echo "</ul>";
 	}
@@ -134,17 +150,20 @@ $('#menu-save').attr('disabled', false);
 	public function save(){
 		session_start();
 		$id_form = (isset($_SESSION['id_form'])) ? $_SESSION['id_form'] : '';
+		$public = (isset($_POST['public']) && $_POST['public'] === 'false') ? 0 : 1;
 		$data = array(
 			':user' => $_SESSION['user'],
 			':id_form' => $id_form,
+			':title' => $_POST['title'],
 			':form' => serialize(json_decode($_POST['form'],true)),
-			':css' => $_POST['css']
+			':css' => $_POST['css'],
+			':public' => $public
 		);
 
 		$query = $this->db
-			->prepare("INSERT INTO forms (id, id_user, form, css)
-				VALUES (:id_form, :user, :form, :css)
-				ON DUPLICATE KEY UPDATE form = :form, css = :css");
+			->prepare("INSERT INTO forms (id, id_user, created_at, title, form, css, public)
+				VALUES (:id_form, :user, now(), :title, :form, :css, :public)
+				ON DUPLICATE KEY UPDATE title = :title, form = :form, css = :css, public = :public");
 		$query->execute($data);
 		$id_form = $this->db->lastInsertId();
 		$_SESSION['id_form'] = $id_form;

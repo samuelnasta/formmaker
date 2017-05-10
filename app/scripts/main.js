@@ -8,7 +8,7 @@ if (!Modernizr.localstorage) {
 
 $(document).ready(function() {
 	window.sortIcon = '<i class="glyphicon glyphicon-move"></i>';
-	window.tempCSS = null;
+	//window.tempCSS = null;
 
 	$('.jumbotron .loading').fadeOut('fast', function() {
 		$('#start').fadeIn('slow');
@@ -39,12 +39,29 @@ $(document).ready(function() {
 
 			// Remembers the CSS saved
 			if(localStorage.getItem('css')) { window.tempCSS = localStorage.getItem('css'); }
+			if(localStorage.getItem('public')) { window.tempPublic = localStorage.getItem('public'); }
+			if(localStorage.getItem('title')) { window.tempTitle = localStorage.getItem('title'); }
 
 			localStorage.clear();
+
+
 
 			if(window.tempCSS) {
 				$('#css').html(window.tempCSS);
 				localStorage.css = window.tempCSS;
+			}
+			if(window.tempPublic) {
+				if(window.tempPublic === 'false') {
+					$('#public').prop('checked', false);
+				}
+				if (window.tempPublic === 'true') {
+					$('#public').prop('checked', true);
+				}
+				localStorage.public = window.tempPublic;
+			}
+			if(window.tempTitle) {
+				$('#title').text(window.tempTitle);
+				localStorage.title = window.window.tempTitle;
 			}
 
 			// Returns the final object with optimized sorting
@@ -118,6 +135,19 @@ $(document).ready(function() {
 		localStorage.removeItem(dataId);
 		window.list();
 	};
+
+
+
+	// Deletes a form
+	window.deleteForm = function(element) {
+		$.post('http://formmaker:8888/functions.php?delete=' + $(element).attr('data-id')
+		).done(function() {
+			$(element).parent().fadeOut(300);
+		}).fail(function() {
+			window.alert('Ops! Something went wrong. Couldn\'t delete this form.');
+		});
+	};
+
 
 
 	// Refresh the list order
@@ -237,10 +267,12 @@ $(document).ready(function() {
 		var JSONArray = JSON.stringify(window.tempArray);
 
 		$.post('http://formmaker:8888/functions.php?save', {
+			'title': $('#title').text(),
 			'form': JSONArray,
-			'css': $('#css').val()
+			'css': $('#css').val(),
+			'public': $('#public').is(':checked')
 		}).done(function() {
-			$('#saved').slideDown();
+			$('#saved').alert().slideDown();
 			window.setTimeout(function() {
 				$('#saved').slideUp();
 			}, 5000);
@@ -254,7 +286,6 @@ $(document).ready(function() {
 	// Load list of links of saved forms
 	$('#load-list').on('click','a',function() {
 		$('#modal-load').modal('hide');
-
 
 		$.getScript('http://formmaker:8888/functions.php?load=' + $(this).attr('data-id'))
 			.done(function(data) {
@@ -379,12 +410,19 @@ $(document).ready(function() {
 	});
 
 
+	// Change form settings
+	$('#public').on('change',function() {
+		localStorage.public = $('#public').is(':checked');
+	});
+
+
 	// Shortcuts
 	window.ENTER_KEYCODE = 13;
 	window.ESC_KEYCODE = 27;
 
 	$(document).keyup(function(event) {
 		if(event.keyCode === window.ESC_KEYCODE) {
+			$('#modal-load').modal('hide');
 			$('#modal-login').modal('hide');
 			$('#modal-signup').modal('hide');
 		}
